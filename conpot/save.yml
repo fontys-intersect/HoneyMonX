@@ -1,0 +1,15 @@
+---
+- hosts: [conpot host main]
+  gather_facts: no
+  tasks:
+    - name: archive container image as a tarball
+      docker_image:
+        name: honeypot:v1.0
+        archive_path: /root/home/conpas/honeypot_v1_0.tar
+        source: pull
+        state: present
+    - name: fetch archived image
+      fetch:
+        src: /root/home/conpas/honeypot_v1_0.tar
+        dest: ./honeypot_v1_0.tar
+        flat: true
