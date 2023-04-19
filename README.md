@@ -1,7 +1,9 @@
-<img src="./docs/img/HoneyMonX.png"  width="256">
+<p align="center">
+    <img src="./docs/img/HoneyMonX.png"  width="256">
+</p>
 
-#
-HoneyMonX is a fully automated ICS/SCADA honeypot environment complete with a monitoring system.  
+# HoneyMonX
+HoneyMonX is a fully automated ICS/SCADA honeypot environment complete with a monitoring system intergrate with. the honeypot is powered by the conpot honeypot develop by mushorg.  
 
 # Requirement
 
