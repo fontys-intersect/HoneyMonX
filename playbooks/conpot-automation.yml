@@ -61,6 +61,7 @@
           - docker-ce
           - docker-ce-cli
           - containerd.io
+          - docker-compose
         state: present
     - name: start and enable docker daemon
       service:
