@@ -1,17 +1,35 @@
 <group name="conpot,http,">
-    <rule id="86500" level="4">
-      <if_matched_sid>86600</if_matched_sid>
+    <rule id="86500" level="0">
       <decoded_as>json</decoded_as>
-      <field name="data_type">^.*</field>
-      <description>Conpot: connection made</description>
+      <field name="data_type">^\.*</field>
+      <description>Conpot logs.</description>
       <options>no_full_log</options>
     </rule>
     
     <!--Log HTTP connection made to conpot-->
     <rule id="86501" level="4">
+      <if_sid>86500</if_sid>
       <decoded_as>json</decoded_as>
       <field name="data_type">http</field>
       <description>Conpot: HTTP connection - $(src_ip)</description>
+      <options>no_full_log</options>
+    </rule>
+
+    <!--Log HTTP connection made to conpot-->
+    <rule id="86501" level="4">
+      <if_sid>86500</if_sid>
+      <decoded_as>json</decoded_as>
+      <field name="data_type">ftp</field>
+      <description>Conpot: ftp connection - $(src_ip)</description>
+      <options>no_full_log</options>
+    </rule>
+    
+    <!--Log HTTP connection made to conpot-->
+    <rule id="86501" level="4">
+      <if_sid>86500</if_sid>
+      <decoded_as>json</decoded_as>
+      <field name="data_type">snmp</field>
+      <description>Conpot: snmp connection - $(src_ip)</description>
       <options>no_full_log</options>
     </rule>
 </group>
