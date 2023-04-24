@@ -6,7 +6,6 @@
     docker_image_name: honeypot
     docker_image_tag: conpot
     dockerfile_path: ./
-    
   tasks:  
    - name: build conpot container image
      docker_image:
@@ -14,8 +13,7 @@
        source: build
        build:
          path: "{{ dockerfile_path }}"
-     tags: "{{ docker_image_tag }}"
-     
+     tags: "{{ docker_image_tag }}"     
    - name: Archive conpot docker image as a tarball
      docker_image:
        name: "{{ docker_image_name }}"
@@ -27,14 +25,48 @@
   gather_facts: 
   vars:
     docker_image_name: honeypot
-    docker_image_tag: conpot
-    
+    docker_image_tag: conpot   
   tasks: 
     - name: Copy conpot tarball to honeypot hosts
       copy: 
         src: /home/student/conpas/"{{ docker_image_name }}".tar
         dest: /home/student/"{{ docker_image_name }}".tar
         
+- hosts: Honeypot_Hosts
+  become: true
+  vars:
+    docker_image_name: honeypot
+    docker_image_tag: conpot
+  tasks:
+    - name: Install prerequisites for Docker repository
+      apt:
+        pkg:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - gnupg2
+        - software-properties-common
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+        state: present
+        update_cache: yes
+    - name: install docker and it's dependencies
+      apt:
+        pkg:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: present
+    - name: start and enable docker daemon
+      service:
+        name: docker
+        state: started
+        enabled: yes          
     - name: Load conpot Docker image from tarball
       docker_image:
         name: honeypot
