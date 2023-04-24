@@ -1,42 +1,12 @@
 ---
-- hosts: localhost
-  gather_facts: no
+- hosts: Honeypot_Hosts
+  collections:
+    - community.docker
   become: true
   vars:
     docker_image_name: honeypot
     docker_image_tag: conpot
-    dockerfile_path: ./
-  tasks:  
-   - name: build conpot container image
-     docker_image:
-       name: "{{ docker_image_name }}"
-       source: build
-       build:
-         path: "{{ dockerfile_path }}"
-     tags: "{{ docker_image_tag }}"     
-   - name: Archive conpot docker image as a tarball
-     docker_image:
-       name: "{{ docker_image_name }}"
-       archive_path: /home/student/conpas/"{{ docker_image_name }}".tar
-       source: pull
-       state: present
-       
-- hosts: Honeypot_Hosts
-  gather_facts: 
-  vars:
-    docker_image_name: honeypot
-    docker_image_tag: conpot   
-  tasks: 
-    - name: Copy conpot tarball to honeypot hosts
-      copy: 
-        src: /home/student/conpas/"{{ docker_image_name }}".tar
-        dest: /home/student/"{{ docker_image_name }}".tar
-        
-- hosts: Honeypot_Hosts
-  become: true
-  vars:
-    docker_image_name: honeypot
-    docker_image_tag: conpot
+    dockerfile_path: ~/
   tasks:
     - name: Install prerequisites for Docker repository
       apt:
@@ -55,22 +25,32 @@
         repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
         state: present
         update_cache: yes
-    - name: install docker and it's dependencies
+    - name: install docker and its dependencies
       apt:
         pkg:
           - docker-ce
           - docker-ce-cli
           - containerd.io
-          - docker-compose
         state: present
+     - name: Install docker-compose
+       remote_user: student
+       get_url: 
+         url : https://github.com/docker/compose/releases/download/1.25.1-rc1/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: 'u+x,g+x'
     - name: start and enable docker daemon
       service:
         name: docker
         state: started
         enabled: yes          
-    - name: Load conpot Docker image from tarball
-      docker_image:
-        name: honeypot
-        load_path: /home/student/"{{ docker_image_name }}".tar
-        state: present
-        source: load
+    - name: Clone conpot repository
+      git: 
+        repo: https://github.com/chandieka/HoneyMonX.git
+        dest: /home/
+        clone: yes
+        update: yes
+    - name: Deploy Docker compose
+      community.docker.docker_compose:
+        project_src: /honeypot/conpot
+        files:
+        - docker-compose.yml
