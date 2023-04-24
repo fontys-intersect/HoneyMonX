@@ -31,13 +31,8 @@
           - docker-ce
           - docker-ce-cli
           - containerd.io
+          - docker-compose
         state: present
-     - name: Install docker-compose
-       remote_user: student
-       get_url: 
-         url : https://github.com/docker/compose/releases/download/1.25.1-rc1/docker-compose-Linux-x86_64
-        dest: /usr/local/bin/docker-compose
-        mode: 'u+x,g+x'
     - name: start and enable docker daemon
       service:
         name: docker
@@ -46,11 +41,11 @@
     - name: Clone conpot repository
       git: 
         repo: https://github.com/chandieka/HoneyMonX.git
-        dest: /home/
+        dest: "~/HoneyMonX"
         clone: yes
         update: yes
     - name: Deploy Docker compose
       community.docker.docker_compose:
-        project_src: /honeypot/conpot
+        project_src: ~/HoneyMonX/honeypot/conpot
         files:
         - docker-compose.yml
