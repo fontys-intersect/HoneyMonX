@@ -15,8 +15,8 @@
       <options>no_full_log</options>
     </rule>
 
-    <!--Log HTTP connection made to conpot-->
-    <rule id="86501" level="4">
+    <!--Log FTP connection made to conpot-->
+    <rule id="86502" level="4">
       <if_sid>86500</if_sid>
       <decoded_as>json</decoded_as>
       <field name="data_type">ftp</field>
@@ -24,12 +24,30 @@
       <options>no_full_log</options>
     </rule>
     
-    <!--Log HTTP connection made to conpot-->
-    <rule id="86501" level="4">
+    <!--Log SNMP connection made to conpot-->
+    <rule id="86503" level="4">
       <if_sid>86500</if_sid>
       <decoded_as>json</decoded_as>
       <field name="data_type">snmp</field>
       <description>Conpot: snmp connection - $(src_ip)</description>
+      <options>no_full_log</options>
+    </rule>
+    
+    <!--Log S7Comm connection made to conpot-->
+    <rule id="86504" level="4">
+      <if_sid>86500</if_sid>
+      <decoded_as>json</decoded_as>
+      <field name="data_type">s7Comm</field>
+      <description>Conpot: S7Comm connection - $(src_ip)</description>
+      <options>no_full_log</options>
+    </rule>
+    
+    <!--Log MODBUS connection made to conpot-->
+    <rule id="86505" level="4">
+      <if_sid>86500</if_sid>
+      <decoded_as>json</decoded_as>
+      <field name="data_type">modbus</field>
+      <description>Conpot: MODBUS connection - $(src_ip)</description>
       <options>no_full_log</options>
     </rule>
 </group>
