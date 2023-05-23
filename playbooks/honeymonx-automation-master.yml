@@ -1,0 +1,50 @@
+---
+#HoneyMonX Automation script - Installation of Wazuh Indexer, Master and Dashboard
+# Wazuh - Certificates generation
+- hosts: Honeypot_Master_Dashboard
+  roles:
+    - role: ../roles/wazuh/wazuh-indexer
+      perform_installation: false
+  become: no
+  vars:
+    indexer_node_master: true
+    instances:
+      node1:
+        name: node-1
+        ip: '{{ localhost_ip }}'
+        role: indexer
+  tags:
+    - generate-certs
+      
+# Wazuh Indexer, Manager & Dashboard installation
+- name: "Wazuh Indexer and Manager"
+  hosts: Honeypot_Master_Dashboard
+  become: yes
+  become_user: root
+  roles:
+    - role: ../roles/wazuh/wazuh-indexer
+    - role: ../roles/wazuh/ansible-wazuh-manager
+    - role: ../roles/wazuh/ansible-filebeat-oss
+    - role: ../roles/wazuh/wazuh-dashboard
+  vars:
+    single_node: true
+    minimum_master_nodes: 1
+    indexer_node_master: true
+    indexer_network_host: '{{ localhost_ip }}'
+    filebeat_node_name: node-1
+    filebeat_output_indexer_hosts:
+    - '{{ localhost_ip }}'
+    instances:
+      node1:
+        name: node-1
+        ip: '{{ localhost_ip }}'
+        role: indexer
+    ansible_shell_allow_world_readable_temp: true
+    
+- name: Deploy the Wazuh agent
+  ansible.builtin.import_playbook: honeymonx-automation-agents.yml
+  
+- name: Deploy the Conpot docker image
+  ansible.builtin.import_playbook: honeymonx-automation-conpot.yml
+  
+
