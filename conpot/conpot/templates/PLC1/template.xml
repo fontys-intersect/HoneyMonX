@@ -77,6 +77,12 @@
             <key name="Switches">
                 <value type="value">"Closed"</value>
             </key>
+            <key name="Power">
+                <value type="value">"5000"</value>
+            </key>
+            <key name="EnergyConsumption">
+                <value type="function">conpot.emulators.misc.power.EnergyConsumption</value>
+            </key>
         </key_value_mappings>
     </databus>
 </core>

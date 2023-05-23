@@ -33,3 +33,46 @@ class Random16bitRegister:
 
     def get_value(self):
         return [self.key_num.randint(0, 1)]
+
+
+# self defined ranges
+class RandomValueBetween2And35:
+    def __init__(self, previous=-1):
+        if previous >= 0:
+            initial = previous
+        else:
+            initial = 33
+        self.previous = initial
+
+        self.start = 2
+        self.end = 35
+
+    def get_value(self):
+        self.case = random.randint(0, 50)
+        if self.case < 25 and self.previous > self.start:
+            self.previous -= 1
+        else:
+            if self.previous < self.end:
+                self.previous += 1
+        return self.previous
+
+
+class RandomValueBetween20And50:
+    def __init__(self, previous=-1):
+        if previous >= 0:
+            initial = previous
+        else:
+            initial = 25
+        self.previous = initial
+
+        self.start = 20
+        self.end = 50
+
+    def get_value(self):
+        self.case = random.randint(0, 50)
+        if self.case < 25 and self.previous > self.start:
+            self.previous -= 1
+        else:
+            if self.previous < self.end:
+                self.previous += 1
+        return self.previous
