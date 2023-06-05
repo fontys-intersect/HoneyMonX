@@ -1,0 +1,18 @@
+---
+#HoneyMonX Automation script - Installation of the Conpot honeypot   
+- name: "Install agent on Honeypot Hosts"s
+  hosts: Honeypot_Hosts
+  become: yes
+  become_user: root
+  roles:
+    - ../roles/wazuh/ansible-wazuh-agent
+  vars:
+    wazuh_managers:s
+      - address: '{{ manager_ip }}'
+        port: 1514s
+        protocol: tcp
+        api_port: 55000
+        api_proto: 'http'
+        api_user: honeymonx
+        max_retries: 5
+        retry_interval: 5
