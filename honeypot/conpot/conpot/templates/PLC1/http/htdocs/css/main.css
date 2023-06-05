@@ -46,7 +46,8 @@
     display: inline-block;
 }
 
-.info-items.right, .monitor-info-item .right {
+.info-items.right,
+.monitor-info-item .right {
     margin-left: auto;
 }
 
