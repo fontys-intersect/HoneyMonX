@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<snmp enabled="True" host="0.0.0.0" port="16100">
+    <config>
+        <!-- Configure individual delays for SNMP commands -->
+        <entity name="tarpit" command="get">0.1;0.2</entity>
+        <entity name="tarpit" command="set">0.1;0.2</entity>
+        <entity name="tarpit" command="next">0.0;0.1</entity>
+        <entity name="tarpit" command="bulk">0.2;0.4</entity>
+
+        <!-- Configure DoS evasion thresholds (req_per_ip/minute;req_overall/minute) -->
+        <entity name="evasion" command="get">120;240</entity>
+        <entity name="evasion" command="set">120;240</entity>
+        <entity name="evasion" command="next">240;600</entity>
+        <entity name="evasion" command="bulk">120;240</entity>
+    </config>
+    <mibs>
+        <mib name="SNMPv2-MIB">
+            <symbol name="sysDescr">
+                <!-- Value is key in databus -->
+                <value>SystemDescription</value> <!-- Siemens, SIMATIC, S7-300 -->
+            </symbol>
+            <symbol name="sysObjectID">
+                <value>sysObjectID</value><!-- 0.0 -->
+            </symbol>
+            <symbol name="sysUpTime">
+                <value>Uptime</value>
+            </symbol>
+            <symbol name="sysContact">
+                <value>sysContact</value><!-- Siemens AG -->
+            </symbol>
+            <symbol name="sysLocation">
+                <value>sysLocation</value><!-- Paris -->
+            </symbol>
+            <symbol name="sysServices">
+                <value>sysServices</value><!-- 72 -->
+            </symbol>
+            <symbol name="IncomingFeederVoltage">
+                <value>IncomingFeederVoltage</value>
+            </symbol>
+	        <symbol name="TransformerPrimaryVoltage">
+                <value>TransformerPrimaryVoltage</value>
+            </symbol>
+            <symbol name="TransformerSecondaryVoltage">
+                <value>TransformerSecondaryVoltage</value>
+            </symbol>
+            <symbol name="FeederVoltage">
+                <value>FeederVoltage</value>
+            </symbol>
+            <symbol name="SubstationBusVoltage">
+                <value>SubstationBusVoltage</value>
+            </symbol>            
+        </mib>
+    </mibs>
+</snmp>
