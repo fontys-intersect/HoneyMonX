@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview - <condata source="databus" key="SystemDescription"/></title>
+    <!-- <meta http-equiv="refresh" content="1"/> -->
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="app">
+        <div class="container">
+            <div class="system-info">
+                <div class="system-info-details">
+                    <div class="info-collection">
+                        <span class="info-items">System uptime:</span>
+                        <span class="info-items right">
+                            <condata source="databus" key="Uptime"/>
+                            Timeticks(deciseconds)
+                        </span>
+                    </div>
+                    <div class="info-collection">
+                        <span class="info-items">Current time:</span>
+                        <span class="info-items right">
+                            <condata source="eval" key="time.strftime('%H:%M:%S', time.localtime())"/>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="system-monitor">
+                <div class="monitor-item">
+                    <div class="description">
+                        <span class="description-text">INCOMING</span>
+                        <img class="description-icon" src="img/bolt-solid.svg" alt="voltage icon">
+                    </div>
+                    <div class="monitor-info">
+                        <div class="monitor-info-item">
+                            <div class="left">Incomming feeder voltage:</div>
+                            <div class="right">
+                                <condata source="databus" key="IncomingFeederVoltage"/>
+                                kV
+                            </div>
+                        </div>
+                        <div class="monitor-info-item">
+                            <div class="left">Transformer primary voltage:</div>
+                            <div class="right">
+                                <condata source="databus" key="TransformerPrimaryVoltage"/>
+                                kV
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="monitor-item out-volt-meter">
+                    <div class="description">
+                        <span class="description-text">OUTGOING</span>
+                        <img class="description-icon" src="img/bolt-solid.svg" alt="voltage icon">
+                    </div>
+                    <div class="monitor-info">
+                        <div class="monitor-info-item">
+                            <div class="left">Transformer secondary voltage:</div>
+                            <div class="right">
+                                <condata source="databus" key="TransformerSecondaryVoltage"/> 
+                                kV
+                            </div>
+                        </div>
+                        <div class="monitor-info-item">
+                            <div class="left">Substation bus voltage:</div>
+                            <div class="right">
+                                <condata source="databus" key="SubstationBusVoltage"/>
+                                kV
+                            </div>
+                        </div>
+                        <div class="monitor-info-item">
+                            <div class="left">Feeder voltage:</div>
+                            <div class="right">
+                                <condata source="databus" key="FeederVoltage"/>
+                                kV
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="monitor-item temp-meter">
+                    <div class="temp-icon">
+                        <img class="icon" src="img/termometer-icon.svg" alt="voltage icon">
+                    </div>
+                    <div class="monitor-info">
+                        <div class="monitor-info-item">
+                            <div class="left">Substation ambient temp:</div>
+                            <div class="right">
+                                <condata source="databus" key="SubstationAmbientTemp"/>
+                                ℃
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="monitor-item">
+                    <div class="description">
+                        <span class="description-text">PF</span>
+                        <!-- <img class="description-icon" src="img/bolt-solid.svg" alt="voltage icon"> -->
+                    </div>
+                    <div class="monitor-info">
+                        <div class="monitor-info-item">
+                            <div class="left">Power Factor:</div>
+                            <div class="right">
+                                <condata source="databus" key="PowerFactor"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="monitor-item">
+                    <div class="description">
+                        <span class="description-text">System Status</span>
+                        <!-- <img class="description-icon" src="img/bolt-solid.svg" alt="voltage icon"> -->
+                    </div>
+                    <div class="monitor-info">
+                        <div class="monitor-info-item">
+                            <img class="monitor-info-item-icon" src="img/power-off-solid.svg"/>
+                            <div class="left">Power:</div>
+                            <div class="right">
+                                <condata source="databus" key="Power"/> 
+                                kW
+                            </div>
+                        </div>
+                        <div class="monitor-info-item">
+                            <img class="monitor-info-item-icon" src="img/clock-regular.svg" />
+                            <div class="left">Energy consumption:</div>
+                            <div class="right">
+                                <condata source="databus" key="EnergyConsumption"/>
+                                kWh
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="monitor-item">
+                    <div class="description">
+                        <span class="description-text">Switch Status</span>
+                        <!-- <img class="description-icon" src="img/bolt-solid.svg" alt="voltage icon"> -->
+                    </div>
+                    <div class="monitor-info">
+                        <div class="monitor-info-item">
+                            <img class="monitor-info-item-icon large" src="img/e-switch.png" />
+                            <div class="left">Status of the switches:</div>
+                            <div class="right">
+                                <condata source="databus" key="Switches"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
