@@ -13,3 +13,7 @@ services:
       - "69:6969/udp" #TFTP
       - "44818:44818" #EN/IP
     restart: always
+    volumes:
+      - log-data:/var/log/
+volumes:
+  log-data:
