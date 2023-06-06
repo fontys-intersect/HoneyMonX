@@ -35,5 +35,5 @@
 
     - name: restart Wazuh Manager
       ansible.builtin.command:
-        cmd: systemctl restart wazuh-indexer.service
+        cmd: systemctl restart wazuh-manager
       become: yes     
