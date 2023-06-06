@@ -14,6 +14,6 @@ services:
       - "44818:44818" #EN/IP
     restart: always
     volumes:
-      - log-data:/var/log/
+      - conpot_log:/var/log/
 volumes:
-  log-data:
+  conpot_log:
