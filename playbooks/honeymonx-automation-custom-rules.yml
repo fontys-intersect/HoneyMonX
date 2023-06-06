@@ -1,0 +1,55 @@
+---
+#Copy custom agents.conf to /var/ossec/etc/rules for Agent
+- hosts: Honeypot_Hosts
+  tasks:
+    - name: Create new directory for shared configurations
+      ansible.builtin.file:
+        path: /var/ossec/etc/shared/conpot
+        state: directory
+        owner: root
+      become: yes
+           
+    - name: Copy agents.conf to rules
+      ansible.builtin.copy:
+        src: ../config/wazuh/wazuh-agent/conpot/agent.conf
+        dest: /var/ossec/etc/shared/conpot
+        owner: root
+      become: yes
+           
+    - name: restart Wazuh Agent
+      become: yes
+      ansible.builtin.command:
+        cmd: systemctl restart wazuh-agent.service
+      
+#Copy custom conpot_rules, suricata_rules and export.ndjson for Wazuh Manager
+- hosts: Honeypot_Master_Dashboard
+  tasks:
+    - name: Copy conpot_rules to the manager
+      ansible.builtin.copy:
+        src: ../config/wazuh/wazuh-manager/conpot_rules.xml
+        dest: /var/ossec/etc/rules/
+        owner: root
+      become: yes
+      
+    - name: Copy overwrite_suricata_rules to the manager
+      ansible.builtin.copy:
+        src: ../config/wazuh/wazuh-manager/overwrite_suricata_rules.xml
+        dest: /var/ossec/etc/rules/
+        owner: root
+      become: yes     
+      
+    - name: Copy export.ndJson file to the manager
+      ansible.builtin.copy:
+        src: ../config/wazuh/wazuh-manager/export.ndjson
+        dest: /home/student/Documents/
+        owner: root
+      become: yes
+      
+#Curl export.ndjson to the Wazuh manager API and restart the indexer     
+
+#Curl location - https://localhost/app/management/opensearch-dashboard/objects
+
+    - name: restart Wazuh Manager
+      ansible.builtin.command:
+        cmd: systemctl restart wazuh-indexer.service
+      become: yes     
