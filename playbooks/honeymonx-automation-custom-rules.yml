@@ -2,38 +2,41 @@
 #Copy custom conpot_rules, suricata_rules, export.ndjson and shared agent config to Wazuh Manager
 - hosts: Honeypot_Master_Dashboard
   tasks:
-    - name: Copy agents.conf to the wazuh manager
+    - name: Copy agents.conf to the Wazuh Manager
       ansible.builtin.copy:
         src: ../config/wazuh/wazuh-agent/conpot/agent.conf
         dest: /var/ossec/etc/shared/default
         owner: root
       become: yes
-    
-    - name: Copy conpot_rules to the wazuh manager
+
+    - name: Copy conpot_rules to the Wazuh Manager
       ansible.builtin.copy:
         src: ../config/wazuh/wazuh-manager/conpot_rules.xml
         dest: /var/ossec/etc/rules/
         owner: root
       become: yes
-      
-    - name: Copy overwrite_suricata_rules to wazuh the manager
+
+    - name: Copy overwrite_suricata_rules to Wazuh Manager
       ansible.builtin.copy:
         src: ../config/wazuh/wazuh-manager/overwrite_suricata_rules.xml
         dest: /var/ossec/etc/rules/
         owner: root
-      become: yes     
-      
-    - name: Copy export.ndJson file to the wazuh manager
+      become: yes
+
+    - name: Copy export.ndJson file to the Wazuh Manager
       ansible.builtin.copy:
         src: ../config/wazuh/wazuh-manager/export.ndjson
         dest: /home/student/Documents/
         owner: root
       become: yes
-      
-#TODO: Curl export.ndjson to the Wazuh manager API and restart the indexer     
-#      URL - https://localhost/app/management/opensearch-dashboard/objects
+
+# Curl export.ndjson to the Wazuh manager API and restart the indexer
+    - name: POST export.ndjson to Wazuh API
+      ansible.builtin.command:
+        cmd: curl -XPOST "https://admin:changeme@localhost/api/saved_objects/_import?overwrite=true" -k -H "osd-xsrf: true" --form file=@/home/student/Documents/export.ndjson
+      become: yes
 
     - name: restart Wazuh Manager
       ansible.builtin.command:
         cmd: systemctl restart wazuh-manager
-      become: yes     
+      become: yes
