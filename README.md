@@ -6,6 +6,12 @@
 HoneyMonX is a fully automated ICS/SCADA honeypot environment complete with a monitoring system intergrated. 
 The honeypot is powered by the conpot honeypot develop by mushorg. the monitoring system is powered by WAZUH EDR.
 
+<p align="center">
+    <img src="./docs/img/SCADA-UI.png"  width="512">
+</p>
+
+the honeypot comes with a custom dummy Web UI as shown above. the values shown on the UI are source from known real values that were reseached for this particular purpose.
+
 # Installation
 before starting the installation process adjust the values that are found in the "playbooks/inventory.cfg". 
 the values that are needed to be changes are the SSH credential (if key-auth is not enabled) and the IP address of the 2 machines.
