@@ -31,3 +31,7 @@ To turn disable it and have the playbook run smoothly, run the following on the 
 ```
 
 # How to contribute
+If you want to contribute to this project start by making an issue ticket in the issue section, and then push your changes.
+
+# Licences
+This project is licences under GPL v2.0, if you dont have a copy, get one from here: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
