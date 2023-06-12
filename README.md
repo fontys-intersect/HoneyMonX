@@ -23,7 +23,7 @@ Alternatively if ssh key-auth is not enabled:
 Installation of Wazuh on Debian based system may faced "for apt not getting the lock it need" issued when running the playbook.
 This issue normally caused by auto update features or an unattended upgrades.
 
-To turn disable it and have the playbook run smoothly, run the following on the Monitoring and Honeypot host:
+To disable it and have the playbook run smoothly, you can turn the feature off by running the following on the Monitoring and Honeypot host:
 
 ```
 --- select NO when prompted
