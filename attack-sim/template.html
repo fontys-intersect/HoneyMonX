@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome</title>
+</head>
+<body>
+<h1>PLC 1.0</h1>
+<div id="data-container">
+    <p class="data-row"><span class="variable-value" id="value1"></span></p>
+    <p class="data-row"><span class="variable-value" id="value2"></span></p>
+    <p class="data-row"><span class="variable-value" id="value3"></span></p>
+<script>
+    function updateData(){
+        fetch('/data/symb.txt')
+            .then(response => response.text())
+            .then(data => {
+                 const lines = data.trim().split('\n');
+                 const lastLine = lines[lines.length - 1];
+		 const values = lastLine.trim().split(',')
+                 document.getElementById('value1').textContent = values[0];
+		 document.getElementById('value2').textContent = values[1];
+ 		 document.getElementById('value3').textContent = values[2];
+            });
+    }
+    setInterval(updateData, 1500);
+</script>
+</body>
+</html>
