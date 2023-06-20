@@ -12,6 +12,9 @@ The honeypot is powered by the conpot honeypot develop by mushorg. the monitorin
 
 the honeypot comes with a custom dummy Web UI as shown above. the values shown on the UI are source from known real values that were reseached for this particular purpose.
 
+# Prerequisite
+3 Machine is required, one for the honeypot, one for the Monitoring system and one is for manager.
+
 # Installation
 before starting the installation process adjust the values that are found in the "playbooks/inventory.cfg". 
 the values that are needed to be changes are the SSH credential (if key-auth is not enabled) and the IP address of the 2 machines.
@@ -41,3 +44,12 @@ If you want to contribute to this project start by making an issue ticket in the
 
 # Licences
 This project is licences under GPL v2.0, if you dont have a copy, get one from here: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+
+# Credits
+- Thom Duran
+- Chandieka Tasbihyantra
+- Aleksandar Dobrev
+- Denis Atanasov
+- Twan Bernarts
+- Lloyd Jones
+- Teun van der Zanden
