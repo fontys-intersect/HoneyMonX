@@ -47,9 +47,12 @@ This project is licences under GPL v2.0, if you dont have a copy, get one from h
 
 # Credits
 - Thom Duran
-- Chandieka Tasbihyantra
+- Chandieka Tasbihyantra 
 - Aleksandar Dobrev
 - Denis Atanasov
 - Twan Bernarts
 - Lloyd Jones
 - Teun van der Zanden
+
+# Contact Person
+Dev email: candiekatasbihyantra2@gmail.com
